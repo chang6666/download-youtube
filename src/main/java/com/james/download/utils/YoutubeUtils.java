@@ -31,7 +31,7 @@ public class YoutubeUtils {
 
     public static void downloadVideo(String videoUrl,String videoFormat,String outputFileName, String cookieFilePath) {
         // yt-dlp 命令，包含 cookies 文件和多线程下载参数
-        String command = String.format("yt-dlp --cookies %s -N 8 -f %s -o %s %s",
+        String command = String.format("yt-dlp  --cookies %s -N 12 -f %s --no-warn -o %s %s",
                 cookieFilePath,videoFormat, outputFileName+".%(ext)s", videoUrl);
 
         try {
