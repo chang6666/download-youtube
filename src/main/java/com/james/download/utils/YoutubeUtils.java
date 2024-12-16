@@ -21,11 +21,18 @@ public class YoutubeUtils {
         return "unknown_video_id"; // 默认视频 ID
     }
 
+    /**
+     * 下载视频
+     * @param videoUrl 视频地址
+     * @param videoFormat 视频参数信息 eg:bestvideo[height<=720]   ||   bestvideo[height<=144]+bestaudio/best[height<=720p]
+     * @param outputFileName 输出文件名
+     * @param cookieFilePath cookies 文件路径
+     */
 
-    public static void downloadVideo(String videoUrl,String outputFileName, String cookieFilePath) {
+    public static void downloadVideo(String videoUrl,String videoFormat,String outputFileName, String cookieFilePath) {
         // yt-dlp 命令，包含 cookies 文件和多线程下载参数
-        String command = String.format("yt-dlp --cookies %s -N 8 -f best -o %s %s",
-                cookieFilePath, outputFileName+".%(ext)s", videoUrl, cookieFilePath, videoUrl);
+        String command = String.format("yt-dlp --cookies %s -N 8 -f %s -o %s %s",
+                cookieFilePath,videoFormat, outputFileName+".%(ext)s", videoUrl);
 
         try {
             // 创建进程

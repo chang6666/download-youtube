@@ -18,7 +18,11 @@ public class DownloadYoutubeApplication {
 
     @GetMapping("/")
     public String down(){
-        YoutubeUtils.downloadVideo("https://www.youtube.com/watch?v=----meyKR48",YoutubeUtils.extractVideoId("https://www.youtube.com/watch?v=----meyKR48"), "/Users/james/Downloads/yt_dlp-main/cookies.txt");
+        String videoUrl = "https://www.youtube.com/watch?v=----meyKR48";
+        String outputFileName = YoutubeUtils.extractVideoId(videoUrl);
+        String videoFormat = "bestvideo[height<=720]";
+        String cookieFilePath = YoutubeUtils.extractVideoId(videoUrl);
+        YoutubeUtils.downloadVideo(videoUrl,videoFormat,outputFileName,cookieFilePath);
         return "success";
     }
 

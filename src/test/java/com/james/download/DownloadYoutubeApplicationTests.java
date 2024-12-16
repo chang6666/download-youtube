@@ -10,9 +10,11 @@ class DownloadYoutubeApplicationTests {
 
     @Test
     void contextLoads() {
-        String videoUrl = "https://www.youtube.com/watch?v=----meyKR48"; // 替换为你要下载的视频链接
-        String cookieFilePath = "/Users/james/Downloads/yt_dlp-main/cookies.txt"; // 替换为你的 cookies 文件路径
-        YoutubeUtils.downloadVideo("https://www.youtube.com/watch?v=----meyKR48",YoutubeUtils.extractVideoId("https://www.youtube.com/watch?v=----meyKR48"), "/Users/james/Downloads/yt_dlp-main/cookies.txt");
+        String videoUrl = "https://www.youtube.com/watch?v=----meyKR48";
+        String outputFileName = YoutubeUtils.extractVideoId(videoUrl);
+        String videoFormat = "bestvideo[height<=720]";
+        String cookieFilePath = YoutubeUtils.extractVideoId(videoUrl);
+        YoutubeUtils.downloadVideo(videoUrl,videoFormat,outputFileName,cookieFilePath);
     }
 
 }
