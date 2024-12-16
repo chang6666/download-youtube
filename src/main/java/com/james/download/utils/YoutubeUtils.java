@@ -8,8 +8,8 @@ public class YoutubeUtils {
 
 
     public static void downloadVideo(String videoUrl, String cookieFilePath) {
-        // yt-dlp 命令，包含 cookies 文件
-        String command = "yt-dlp --cookies " + cookieFilePath + " " + videoUrl;
+        // yt-dlp 命令，包含 cookies 文件和多线程下载参数
+        String command = String.format("yt-dlp --cookies %s -N 4 -f best %s", cookieFilePath, videoUrl);
 
         try {
             // 创建进程
