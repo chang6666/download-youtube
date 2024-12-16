@@ -7,9 +7,25 @@ import java.io.InputStreamReader;
 public class YoutubeUtils {
 
 
-    public static void downloadVideo(String videoUrl, String cookieFilePath) {
+    // 提取视频 ID
+    public static String extractVideoId(String videoUrl) {
+        String[] parts = videoUrl.split("v=");
+        if (parts.length > 1) {
+            String id = parts[1];
+            int ampersandIndex = id.indexOf("&");
+            if (ampersandIndex != -1) {
+                id = id.substring(0, ampersandIndex);
+            }
+            return id;
+        }
+        return "unknown_video_id"; // 默认视频 ID
+    }
+
+
+    public static void downloadVideo(String videoUrl,String outputFileName, String cookieFilePath) {
         // yt-dlp 命令，包含 cookies 文件和多线程下载参数
-        String command = String.format("yt-dlp --cookies %s -N 4 -f best %s", cookieFilePath, videoUrl);
+        String command = String.format("yt-dlp --cookies %s -N 8 -f best -o %s %s",
+                cookieFilePath, outputFileName+".%(ext)s", videoUrl, cookieFilePath, videoUrl);
 
         try {
             // 创建进程
